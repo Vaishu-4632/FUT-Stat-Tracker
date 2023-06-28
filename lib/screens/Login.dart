@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stat_tracker/screens/Forgotpassword.dart';
+import 'package:stat_tracker/screens/LandingScreen.dart';
 import 'package:stat_tracker/screens/RegisterScreen.dart';
 import 'package:stat_tracker/utils/background.dart';
 import 'package:stat_tracker/utils/validator.dart';
@@ -145,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ForgotPassword()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LandingScreen()));
                   },
                   child: const Text(
                     'Forgot Password',
