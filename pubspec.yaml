@@ -44,6 +44,11 @@ dependencies:
   country_picker: ^2.0.20
   country_list_pick: ^1.0.1+6
   csc_picker: ^0.2.7
+  scroll_page_view: ^1.0.2
+  intl: ^0.18.1
+  infinite_listview: ^1.1.0
+  animated_text_kit: ^4.2.2
+  convex_bottom_bar: ^3.2.0
 
 dev_dependencies:
   flutter_test:

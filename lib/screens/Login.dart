@@ -132,7 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ]),
                   ),
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LandingScreen()));
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent),
@@ -146,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LandingScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ForgotPassword()));
                   },
                   child: const Text(
                     'Forgot Password',

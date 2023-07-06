@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stat_tracker/screens/Login.dart';
 import 'package:stat_tracker/utils/background.dart';
+import 'package:scroll_page_view/pager/page_controller.dart';
+import 'package:scroll_page_view/pager/scroll_page_view.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
