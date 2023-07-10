@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stat_tracker/screens/tracker.dart';
+import 'package:animated_background/animated_background.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -14,25 +15,14 @@ class LandingScreen extends StatefulWidget {
   State<LandingScreen> createState() => _LandingScreenState();
 }
 
-class _LandingScreenState extends State<LandingScreen> with SingleTickerProviderStateMixin {
-    AnimationController?  _animationController ;
-    Animation? _slideAnimation;
+class _LandingScreenState extends State<LandingScreen> with TickerProviderStateMixin {
   int counter1 = 0;
   int counter2 = 0;
   int counter3 = 0;
   final _controller = PageController();
-  double targetValue = 200.0;
+  bool _bool = false;
 
-  void initstate(){
-    super.initState();
-    _animationController = AnimationController(vsync: this,duration: const Duration(milliseconds: 1000));
-    
-    setState(() {
-      targetValue = targetValue == 24 ? 48 : 24;
-    });
-    _animationController!.forward();
-   
-  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,28 +51,18 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
                           ),
                         ),
                       ),
-                      TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 10, end: targetValue),
-                        duration: const Duration(milliseconds: 800),
-                        builder: (context,size ,child){
-                          return Positioned(
-                            top: 100,
-                            left: 50,
-                            child: Transform.scale(scale: 1.9,child: Image.asset('assets/images/images/card_bg_splash.png',height: size, width: size,)));
-                        },
-                       
-                      ),
-                       TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 10, end: targetValue),
-                        duration: const Duration(milliseconds: 1000),
-                        builder: (context,size ,child){
-                          return Positioned(
-                            top: 100,
-                            left: 114,
-                            
-                            child: Transform.scale(scale:1.9,child: Image.asset('assets/images/images/background_splash_1.png',height: size, width: size,)));
-                        },
-                       ),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        alignment: Alignment.topRight,
+                        child: AnimatedCrossFade(firstChild: Image.asset('assets/images/images/card_bg_splash.png'), secondChild: Image.asset('assets/images/images/card_bg_splash.png'), crossFadeState: _bool? CrossFadeState.showFirst : CrossFadeState.showSecond, duration: Duration(milliseconds: 500))),
+                      AnimatedBackground(vsync: this, behaviour:EmptyBehaviour(), child: Container(
+                      )),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        alignment: Alignment.topRight,
+                        child: AnimatedCrossFade(firstChild: Image.asset('assets/images/images/background_splash_1.png'), secondChild: Image.asset('assets/images/images/background_splash_1.png'), crossFadeState: _bool? CrossFadeState.showFirst : CrossFadeState.showSecond, duration: Duration(milliseconds: 500))),
+                      AnimatedBackground(vsync: this, behaviour:EmptyBehaviour(), child: Container(
+                      )),
                       
                       Container(
                         padding: const EdgeInsets.only(top: 140,right: 20),
