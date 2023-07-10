@@ -184,7 +184,7 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     scale: 1.40,
                                     origin: const Offset(-40, -30 ),
                                     child: Image.asset(
-                                      'assets/images/images/ico_man_play.png',
+                                      'assets/images/images/ico_man_victory.png',
                                     ),
                                   ),
                                   
@@ -349,16 +349,16 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
       ),
     
       bottomNavigationBar: ConvexAppBar(
-        height: 70,
-        
+        height: 80,
+        cornerRadius: 25,
         style: TabStyle.fixedCircle,
         backgroundColor: const Color.fromARGB(255, 35, 27, 82),
         items: [
-          TabItem(icon: Image.asset('assets/images/images/soccer-field.png'),title:'MATCHES' ,isIconBlend: false, ),
-          TabItem(icon: Image.asset('assets/images/images/analytics.png'),title: 'STATS'),
+          TabItem(icon: Container(margin: EdgeInsets.only(bottom: 5),child: Image.asset('assets/images/images/soccer-field.png',cacheHeight: 30,)),title:'MATCHES' ,isIconBlend: false, ),
+          TabItem(icon: Container(margin: EdgeInsets.only(bottom: 5),child: Image.asset('assets/images/images/analytics.png',cacheHeight: 30,)),title: 'STATS'),
            TabItem(icon: FloatingActionButton(onPressed: (){},backgroundColor: Colors.purple, child: const Icon(Icons.add,size: 45,)),),
           // TabItem(icon: Icons.add),
-          TabItem(icon: Image.asset('assets/images/images/Shape.png',),title: 'MY CLUB'),
+          TabItem(icon: Container(child: Image.asset('assets/images/images/Shape.png',)),title: 'MY CLUB'),
           const TabItem(icon: Icons.settings,title:'MORE' ),
          
           
