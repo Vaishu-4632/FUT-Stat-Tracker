@@ -1,0 +1,54 @@
+{
+    "gameweeks": [
+      {
+        "week": 1,
+        "startDate": "2023-07-18",
+        "endDate": "2023-07-24"
+      },
+      {
+        "week": 2,
+        "startDate": "2023-07-25",
+        "endDate": "2023-07-31"
+      },
+      {
+        "week": 3,
+        "startDate": "2023-08-01",
+        "endDate": "2023-08-07"
+      },
+      {
+        "week": 4,
+        "startDate": "2023-08-08",
+        "endDate": "2023-08-14"
+      },
+      {
+        "week": 5,
+        "startDate": "2023-08-15",
+        "endDate": "2023-08-21"
+      },
+      {
+        "week": 6,
+        "startDate": "2023-08-22",
+        "endDate": "2023-08-28"
+      },
+      {
+        "week": 7,
+        "startDate": "2023-08-29",
+        "endDate": "2023-09-04"
+      },
+      {
+        "week": 8,
+        "startDate": "2023-09-05",
+        "endDate": "2023-09-11"
+      },
+      {
+        "week": 9,
+        "startDate": "2023-09-12",
+        "endDate": "2023-09-18"
+      },
+      {
+        "week": 10,
+        "startDate": "2023-09-19",
+        "endDate": "2023-09-25"
+      }
+    ]
+  }

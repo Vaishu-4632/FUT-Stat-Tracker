@@ -1,12 +1,12 @@
 import 'dart:ui';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stat_tracker/screens/tracker.dart';
-import 'package:animated_background/animated_background.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:delayed_display/delayed_display.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -20,116 +20,157 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
   int counter2 = 0;
   int counter3 = 0;
   final _controller = PageController();
-  bool _bool = false;
+  // bool _bool = false;
+  Animation<double>? animation ;
+  AnimationController? animationController;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    animationController =
+        AnimationController(vsync: this, duration: (Duration(milliseconds: 1100)));
+    animation = Tween<double>(begin: 200, end: -40).animate(animationController!)
+      ..addListener(() {
+        setState(() {});
+      });
+      animationController!.forward();
+  }
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 35, 27, 82),
+      backgroundColor:
+       Color.fromARGB(255, 11, 6, 36) ,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Card(
-              margin: const EdgeInsets.only(left: 20, right: 10, top: 10),
-              elevation: 1,
+              color: const Color.fromARGB(255, 11, 6, 36),
+              elevation: 0,
+              margin: const EdgeInsets.only( top: 10),
               child: Center(
                 child: Container(
-                  color: const Color.fromARGB(255, 35, 27, 82),
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 1.75,
+                  height: 600,
 
                   child: Stack(
                     children: [
+                     
                       Positioned(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 80, right: 30),
+                          padding: const EdgeInsets.only(left: 100, right: 30),
                           child: Image.asset(
                             'assets/images/images/Logo.png',
-                            width: MediaQuery.of(context).size.width / 2,
+                            width: MediaQuery.of(context).size.width / 1.9,
                             alignment: Alignment.topCenter,
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(right: 20),
-                        alignment: Alignment.topRight,
-                        child: AnimatedCrossFade(firstChild: Image.asset('assets/images/images/card_bg_splash.png'), secondChild: Image.asset('assets/images/images/card_bg_splash.png'), crossFadeState: _bool? CrossFadeState.showFirst : CrossFadeState.showSecond, duration: Duration(milliseconds: 500))),
-                      AnimatedBackground(vsync: this, behaviour:EmptyBehaviour(), child: Container(
-                      )),
-                      Container(
-                        margin: EdgeInsets.only(right: 20),
-                        alignment: Alignment.topRight,
-                        child: AnimatedCrossFade(firstChild: Image.asset('assets/images/images/background_splash_1.png'), secondChild: Image.asset('assets/images/images/background_splash_1.png'), crossFadeState: _bool? CrossFadeState.showFirst : CrossFadeState.showSecond, duration: Duration(milliseconds: 500))),
-                      AnimatedBackground(vsync: this, behaviour:EmptyBehaviour(), child: Container(
-                      )),
-                      
-                      Container(
-                        padding: const EdgeInsets.only(top: 140,right: 20),
-                        child:
-                            Image.asset('assets/images/images/mask_group.png'),
-                      ),
-                      Container(
-                        width: 120,
-                        child: Positioned(
-                          child: Transform.scale(
-                            scale: 1.22,
-                            origin: const Offset(-125, -450),
-                            child: ShaderMask(
-                              shaderCallback: (rect) {
-                                return const LinearGradient(colors: [
-                                  Color.fromARGB(255, 203, 224, 12),
-                                  Color.fromARGB(255, 20, 219, 27),
-                                ]).createShader(rect);
-                              },
-                              child: Positioned(
-                                left: 100,
-                                child: DefaultTextStyle(
-                                  style: const TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.none
-                                  ),
-                                  child: AnimatedTextKit(
-                                    repeatForever: false,
-                                    totalRepeatCount: 1,
-                                    animatedTexts: [
-                                      RotateAnimatedText('CLASS\nABOVE\nTHE REST',rotateOut: false )
-                                  ]),
-                                ),
+                      Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: 
+                          Transform.scale(
+                            scale: 1.1,
+                            child: Transform.translate(
+                              
+                              offset: Offset(0, animation?.value ?? 0),
+                            child: Container(
+                              
+                              alignment: Alignment.centerRight,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(image: AssetImage('assets/images/images/background_splash_1.png'))
                               ),
+                            ),
                             ),
                           ),
                         ),
-                      ),
-                     Positioned(
-                        top: 220,
-                        left: 20,
-                        child: DefaultTextStyle(
-                          style: const TextStyle(
-                              fontSize: 15,
-                              color: Colors.white60,
-                              decoration: TextDecoration.none),
-
-                         child: AnimatedTextKit(
-                                    repeatForever: false,
-                                    totalRepeatCount: 1,
-                                    animatedTexts: [
-                                      RotateAnimatedText('Start tracking your\nWeekend League\nmatches to generate\nnew stats',rotateOut: false )
-                                  ]),),
                         
+                      
+                      Container(
+                        padding: const EdgeInsets.only(top: 150),
+                        child:
+                            Image.asset('assets/images/images/mask_group.png'),
                       ),
+                     
+                      Container(
+                          width: 120,
+                          // child: Positioned(
+                            child: Transform.scale(
+                              scale: 1.2,
+                              origin: const Offset(-300, -500),
+                              child: ShaderMask(
+                                shaderCallback: (rect) {
+                                  return const LinearGradient(colors: [
+                                    Color.fromARGB(255, 219, 240, 34),
+                                    Color.fromARGB(255, 20, 219, 27),
+                                    Color.fromARGB(255, 22, 111, 184)
+                                  ]).createShader(rect);
+                                },
+                                child: Positioned(
+                                  left: 100,
+                                  child:
+                                    Align(
+                          child: 
+                          Transform.translate(
+                            offset: Offset(0, animation?.value ?? 0),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 90),
+                            alignment: Alignment.topLeft,
+                            child: Text('CLASS\nABOVE\nTHE REST',style: GoogleFonts.bebasNeue(fontWeight: FontWeight.bold, fontSize: 35, color: Colors.white),
+                            ),
+                          ),
+                          ),
+                        ),
+                                ),
+                              ),
+                            ),
+                          // ),
+                        ),
+                      
+                     
+                        Positioned(
+                          top: 250,
+                          left: 40,
+                          child:  DefaultTextStyle(
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none),
+                                               
+                             child:
+                               Align(
+                            child: 
+                            Transform.translate(
+                              offset: Offset(0, animation?.value ?? 0),
+                            child: Container(
+                              margin: EdgeInsets.only(top: 50),
+                              alignment: Alignment.topLeft,
+                              child: const Text('Start tracking your\nWeekend League\nmatches to generate\nnew stats',
+                              ),
+                            ),
+                            ),
+                                                  ),
+                            
+                                      ),
+                          
+                          
+                        ),
+                     
                       Row(
                         children: [
                           Card(
+                            color: Color.fromARGB(255, 27, 21, 61),
                             margin:
-                                const EdgeInsets.only(left: 15, right: 5, top: 320),
-                            elevation: 2,
+                                const EdgeInsets.only(left: 12, right: 10, top: 420),
+                            elevation: 0,
                             child: Container(
-                              height: 120,
-                              width: 100,
-                              color: const Color.fromARGB(255, 35, 27, 82),
+                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+                              height: 115,
+                              width: 115,
+                              // color: Color.fromARGB(255, 27, 21, 61),
                               child: Stack(
                                 children: [
                                   const Padding(
@@ -137,8 +178,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('MATCHES', style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold ),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.40,
-                                    origin: const Offset(-30, -30 ),
+                                    scale: 1.2,
+                                    origin: const Offset(0, -10 ),
                                     child:
                                   Image.asset('assets/images/images/card_bg_splash.png'),),
                                   Padding(
@@ -146,8 +187,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('${counter1}', style: const TextStyle(color: Colors.green, fontSize: 25),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.40,
-                                    origin: const Offset(-40, -30 ),
+                                    scale: 1.10,
+                                    origin: const Offset(-60, -60 ),
                                     child: Image.asset(
                                       'assets/images/images/ico_man_play.png',
                                     ),
@@ -158,13 +199,14 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                             ),
                           ),
                           Card(
+                            color: Color.fromARGB(255, 27, 21, 61),
                             margin:
-                                const EdgeInsets.only(left: 5, right: 5, top: 320),
-                            elevation: 5,
+                                const EdgeInsets.only( right: 10, top: 420),
+                            // elevation: 1,
                             child: Container(
-                              height: 120,
-                              width: 100,
-                              color: const Color.fromARGB(255, 35, 27, 82),
+                              height: 115,
+                              width: 115,
+                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
                               child: Stack(
                                 children: [
                                   const Padding(
@@ -172,8 +214,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('WON', style: TextStyle(color: Colors.white, fontSize: 12,fontWeight: FontWeight.bold ),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.40,
-                                    origin: const Offset(-30, -30 ),
+                                    scale: 1.3,
+                                    origin: const Offset(0, -10 ),
                                     child:
                                   Image.asset('assets/images/images/card_bg_splash.png'),),
                                   Padding(
@@ -181,8 +223,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('$counter2', style: const TextStyle(color: Colors.green, fontSize: 25),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.40,
-                                    origin: const Offset(-40, -30 ),
+                                    scale: 1.10,
+                                    origin: const Offset(-60, -60 ),
                                     child: Image.asset(
                                       'assets/images/images/ico_man_victory.png',
                                     ),
@@ -194,13 +236,15 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                             ),
                           ),
                           Card(
+                            color: Color.fromARGB(255, 27, 21, 61),
                             margin:
-                                const EdgeInsets.only(left: 5, right: 5, top: 320),
-                            elevation: 5,
+                                const EdgeInsets.only(right: 10, top: 420),
+                            // elevation: 5,
                             child: Container(
-                              height: 120,
-                              width: 100,
-                              color: const Color.fromARGB(255, 35, 27, 82),
+                              height: 115,
+                              width: 115,
+                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+                              
                               child: Stack(
                                 children: [
                                   const Padding(
@@ -208,8 +252,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('LOSS', style: TextStyle(color: Colors.white, fontSize: 12 ,fontWeight: FontWeight.bold),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.20,
-                                    origin: const Offset(10, -100 ),
+                                    scale: 1.2,
+                                    origin: const Offset(0, -10 ),
                                     child:
                                   Image.asset('assets/images/images/card_bg_splash.png'),),
                                   Padding(
@@ -217,8 +261,8 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                                     child: Text('$counter3', style: const TextStyle(color: Colors.green, fontSize: 25),),
                                   ),
                                   Transform.scale(
-                                    scale: 1.40,
-                                    origin: const Offset(-40, -30 ),
+                                    scale: 1.10,
+                                    origin: const Offset(-60, -60 ),
                                     child: Image.asset(
                                       'assets/images/images/ico_man_defeat.png',
                                     ),
@@ -236,9 +280,9 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             const Row(
               children: [
                 Padding(
@@ -246,7 +290,7 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                       EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
                   child: Text(
                     'LATEST MATCH',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -258,27 +302,31 @@ class _LandingScreenState extends State<LandingScreen> with TickerProviderStateM
                 ),
               ],
             ),
-            Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 40),
-                  child: Text(
-                    'Add a match to start tracking.',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                TextButton(
-                    onPressed: () {
-                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TrackerScreen()));
-                    },
-                    child: const Text(
-                      'Click to add a match',
+            DelayedDisplay(
+              delay: Duration(milliseconds: 100),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 40),
+                    child: Text(
+                      'Add a match to start tracking.',
                       style: TextStyle(color: Colors.white),
-                    ))
-              ],
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TrackerScreen()));
+                      },
+                      child: const Text(
+                        'Click to add a match',
+                        style: TextStyle(color: Colors.white),
+                      ))
+                ],
+              ),
             ),
+            SizedBox(height: 20,),
             SizedBox(
-              height: 150,
+              height: 200,
               // width: 50,
               child: PageView(
                 controller: _controller,
